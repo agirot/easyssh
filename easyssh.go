@@ -17,6 +17,7 @@ import (
 
 	"golang.org/x/crypto/ssh"
 	"golang.org/x/crypto/ssh/agent"
+	"github.com/laher/goxc/config"
 )
 
 // Contains main authority information.
@@ -75,9 +76,11 @@ func (ssh_conf *MakeConfig) connect() (*ssh.Session, error) {
 		auths = append(auths, ssh.PublicKeys(pubkey))
 	}
 
+	//TODO Add IgnoreHostKey bool in MakeConfig struct and add dynamic HostKeyCallback
 	config := &ssh.ClientConfig{
 		User: ssh_conf.User,
 		Auth: auths,
+		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 	}
 
 	client, err := ssh.Dial("tcp", ssh_conf.Server+":"+ssh_conf.Port, config)
