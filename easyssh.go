@@ -17,7 +17,6 @@ import (
 
 	"golang.org/x/crypto/ssh"
 	"golang.org/x/crypto/ssh/agent"
-	"github.com/laher/goxc/config"
 )
 
 // Contains main authority information.
